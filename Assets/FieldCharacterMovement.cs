@@ -36,7 +36,6 @@ public class FieldCharacterMovement : MonoBehaviour {
 			case TIME_ERA.PAST: TimeController.currentEra = TIME_ERA.FUTURE; break;
 			case TIME_ERA.FUTURE: TimeController.currentEra = TIME_ERA.PAST; break;
 			}
-			BroadcastCenter.broadcastMessage("eraChanged",null);
 		}
 	}
 	
