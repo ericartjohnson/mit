@@ -13,7 +13,9 @@ public class TimeInteraction : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float wheelTurn = Input.GetAxis("Mouse ScrollWheel");
-		if(wheelTurn != 0) TimeController.timeWeight += wheelTurn/sensitivity;
-		Debug.Log(TimeController.timeWeight);
+		if(wheelTurn != 0){
+			TimeController.timeWeight += wheelTurn/sensitivity;
+			Time.timeScale = Mathf.Abs(TimeController.timeWeight);
+		}
 	}
 }

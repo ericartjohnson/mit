@@ -11,17 +11,17 @@ public class FieldCharacterMovement : MonoBehaviour {
 	public float jumpBoost = 4.0f;
 	public float gravity = 20.0f;
 	public float inAirModifier = 3.0f;
-	public bool highJumpReady = false;
-	public float highJumpTimeout = 3.0f;
+	//public bool highJumpReady = false;
+	//public float highJumpTimeout = 3.0f;
 	
 	private bool grounded;
 	private bool headHit;
-	private float highJumpCurTimeout;
+//	private float highJumpCurTimeout;
 	private Vector3 moveDirection = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
-		highJumpCurTimeout = highJumpTimeout;
+		//highJumpCurTimeout = highJumpTimeout;
 	}//Start
 	
 	// Update is called once per frame
@@ -48,7 +48,7 @@ public class FieldCharacterMovement : MonoBehaviour {
 	        moveDirection = transform.TransformDirection(moveDirection);
 
 	        float s = speed;
-
+			/*
 	        if(Input.GetButton("Crouch")){
 	        	s = crouchSpeed;
 	        	highJumpCurTimeout -= Time.deltaTime;
@@ -60,14 +60,15 @@ public class FieldCharacterMovement : MonoBehaviour {
 	        	highJumpReady = false;
 	        	highJumpCurTimeout = highJumpTimeout;
 	        }
+	        */
 	  
 	        moveDirection *= s;
 
 	        if (Input.GetButton ("Jump")) {
 	            moveDirection.y = jumpSpeed;
-	            if(highJumpReady) moveDirection.y += jumpBoost;
-	            highJumpReady = false;
-	            highJumpCurTimeout = highJumpTimeout;
+	            //if(highJumpReady) moveDirection.y += jumpBoost;
+	           // highJumpReady = false;
+	            //highJumpCurTimeout = highJumpTimeout;
 
 	            BroadcastCenter.broadcastMessage("userJumped", "test data");
 	        }
@@ -99,10 +100,13 @@ public class FieldCharacterMovement : MonoBehaviour {
 	    //moveDirection.y -= gravity * Time.deltaTime;
 	    
 	    // Move the controller
-	    CollisionFlags flags = controller.Move(moveDirection * Time.deltaTime);
-		
-		headHit = (flags & CollisionFlags.CollidedAbove) != 0;
-		grounded = (flags & CollisionFlags.CollidedBelow) != 0;
+		Debug.Log(Time.deltaTime);
+		if(Time.deltaTime > 0){
+		    CollisionFlags flags = controller.Move(moveDirection * Time.deltaTime);
+			
+			headHit = (flags & CollisionFlags.CollidedAbove) != 0;
+			grounded = (flags & CollisionFlags.CollidedBelow) != 0;
+		}
 	}//UpdateMovement
 
 }//FieldCharacterMovement
