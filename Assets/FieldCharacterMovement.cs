@@ -26,17 +26,7 @@ public class FieldCharacterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update(){
-		UpdateTimeTravel();
 		UpdateMovement();
-	}
-	
-	void UpdateTimeTravel(){
-		if(Input.GetKeyUp("f")){
-			switch(TimeController.currentEra){
-			case TIME_ERA.PAST: TimeController.currentEra = TIME_ERA.FUTURE; break;
-			case TIME_ERA.FUTURE: TimeController.currentEra = TIME_ERA.PAST; break;
-			}
-		}
 	}
 	
 	void UpdateMovement (){
@@ -100,7 +90,6 @@ public class FieldCharacterMovement : MonoBehaviour {
 	    //moveDirection.y -= gravity * Time.deltaTime;
 	    
 	    // Move the controller
-		Debug.Log(Time.deltaTime);
 		if(Time.deltaTime > 0){
 		    CollisionFlags flags = controller.Move(moveDirection * Time.deltaTime);
 			
