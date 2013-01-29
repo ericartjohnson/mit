@@ -18,13 +18,21 @@ public class EraGeometry : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Renderer[] renderers = this.GetComponentsInChildren<Renderer>();
-		foreach(Renderer renderer in renderers){
-			//renderer.enabled = TimeController.currentEra == livingEra;
+		float a = (TimeController.signedTimeWeightForEra(livingEra) + 1f)/2f;
+		
+		if(renderer){
 			Color c = renderer.material.color;
-			//c.a = TimeController.normalizedWeightForEra(livingEra);
-			c.a = (TimeController.signedTimeWeightForEra(livingEra) + 1f)/2f;
+			c.a = a;
 			renderer.material.color = c;
+		}
+		
+		Renderer[] renderers = this.GetComponentsInChildren<Renderer>();
+		foreach(Renderer r in renderers){
+			//renderer.enabled = TimeController.currentEra == livingEra;
+			Color cl = r.material.color;
+			//c.a = TimeController.normalizedWeightForEra(livingEra);
+			cl.a = a;
+			r.material.color = cl;
 		}
 	}
 	
